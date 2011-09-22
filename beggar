@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+require 'mechanize'
+require 'nokogiri'
+require 'date'
+require 'yaml'
+
+class Float
+  def oposite
+    - self
+  end
+
+  def to_h
+    "#{self}h"
+  end
+
+  def to_pln(rate)
+    "#{self * rate} PLN"
+  end
+end
+
+class Beggar
+  def initialize
+    config = YAML.load_file(File.open(ENV['HOME'] + '/.beggar'))
+    @project = config['project']
+    @subject= config['subject']
+    @token = config['token']
+    @rate = config['rate']
+  end
+
+  def summary
+    "#{days_progress}% || #{houres_today.to_h} ± #{houres_diff.to_h} || #{houres_today.to_pln(@rate)} ± #{houres_diff.to_pln(@rate)}"
+  end
+
+  private
+
+  def xml
+    @xml ||= lambda {
+      agent = Mechanize.new
+      agent.basic_auth(@token, 'X')
+      page = agent.get("https://ragnarson.basecamphq.com/projects/#{@project}/time_entries/report.xml?subject_id=#{@subject}&from=#{first_day}&to=#{last_day}")
+      Nokogiri::XML(page.body)
+    }.call
+  end
+
+  def today
+    @today ||= Date.today
+  end
+
+  def first_day
+    @first_day ||= Date.new(today.year, today.month, 1)
+  end
+
+  def last_day
+    @last_day ||= Date.new(today.year, today.month, 1).next_month - 1
+  end
+
+  def days_potential(last_day)
+    (first_day..last_day).reject { |d| [0,6].include? d.wday }.length
+  end
+
+  def days_progress
+    (days_potential(today).to_f / days_potential(last_day) * 100).round
+  end
+
+  def houres_today
+    xml.xpath("//hours").map(&:content).map(&:to_f).inject(&:+)
+  end
+
+  def houres_potential(last_day)
+    days_potential(last_day) * 8.0
+  end
+
+  def houres_diff
+    (houres_potential(today) - houres_today).oposite
+  end
+end
+
+lex = Beggar.new
+puts lex.summary
