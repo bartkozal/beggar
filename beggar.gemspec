@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Beggar::VERSION
   s.authors     = ["Bartlomiej Kozal"]
   s.email       = ["bkzl@me.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/bkzl/beggar"
   s.summary     = %q{Tool for generating time reports from Basecamp}
   s.description = %q{Tool for generating time reports from Basecamp. You can specify rate for each project and get value of your month salary.}
 
