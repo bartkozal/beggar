@@ -7,7 +7,7 @@ module Beggar
     end
 
     def start
-      Beggar::Base.new(@config).summary
+      $stdout << Beggar::Base.new(@config).summary
     end
     
   private
