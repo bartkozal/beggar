@@ -1,5 +1,11 @@
 require "beggar/version"
 
 module Beggar
-  # Your code goes here...
+  class CLI
+    def initialize(args = nil)
+    end
+
+    def start
+    end
+  end
 end
