@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Bartlomiej Kozal"]
   s.email       = ["bkzl@me.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Tool for generating time reports from Basecamp}
+  s.description = %q{Tool for generating time reports from Basecamp. You can specify rate for each project and get value of your month salary.}
 
   s.rubyforge_project = "beggar"
 
