@@ -44,7 +44,7 @@ module Beggar
       attr_accessor :project_id
 
       def from_basecamp
-        Basecamp::TimeEntry.report(project_id: project_id, from: CurrentMonth.first_day, to: Date.today).map(&:hours).inject(&:+)
+        @@from_basecamp ||= Basecamp::TimeEntry.report(project_id: project_id, from: CurrentMonth.first_day, to: Date.today).map(&:hours).inject(&:+)
       end
 
       def up_today
