@@ -1,3 +1,8 @@
-require "beggar/version"
-require "beggar/cli"
-require "beggar/base"
+require 'basecamp'
+require 'yaml'
+require 'beggar/version'
+require 'beggar/cli'
+require 'beggar/base'
+require 'beggar/current_month'
+require 'beggar/hours'
+require 'beggar/salary'

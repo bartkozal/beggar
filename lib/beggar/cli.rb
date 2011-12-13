@@ -1,5 +1,3 @@
-require 'yaml'
-
 module Beggar
   class CLI
     def initialize(args = nil)
