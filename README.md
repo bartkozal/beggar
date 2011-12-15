@@ -7,3 +7,6 @@ Tool for generating time reports from Basecamp
 
 ## Usage
   TODO
+
+## Changelog
+  TODO
