@@ -1,2 +1,1 @@
 require 'beggar'
-require 'timecop'
