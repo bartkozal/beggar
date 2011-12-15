@@ -5,20 +5,20 @@ module Beggar
     class << self
       attr_accessor :rate
 
-      def from_basecamp
-        Hours.from_basecamp * rate
+      def today
+        Hours.worked * rate
       end
 
-      def up_today
-        Hours.up_today * rate
+      def max_up_today
+        Hours.max_up_today * rate
       end
 
       def difference
-        up_today - from_basecamp
+        max_up_today - today
       end
 
       def to_s
-        %[#{from_basecamp} PLN ± #{difference} PLN]
+        %[#{today} PLN ± #{difference} PLN]
       end
     end
   end

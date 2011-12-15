@@ -5,20 +5,20 @@ module Beggar
     class << self
       attr_accessor :project_id
 
-      def from_basecamp
-        @@from_basecamp ||= Basecamp::TimeEntry.report(project_id: project_id, from: CurrentMonth.first_day, to: Date.today).map(&:hours).inject(&:+)
+      def worked
+        @@worked ||= Basecamp::TimeEntry.report(project_id: project_id, from: CurrentMonth.first_day, to: Date.today).map(&:hours).inject(&:+)
       end
 
-      def up_today
+      def max_up_today
         CurrentMonth.working_days_up_today * 8
       end
 
       def difference
-        up_today - from_basecamp
+        max_up_today - worked
       end
 
       def to_s
-        %[#{from_basecamp}h ± #{difference}h]
+        %[#{worked}h ± #{difference}h]
       end
     end
   end

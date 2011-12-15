@@ -12,8 +12,8 @@ describe 'Beggar::Hours' do
 
     subject { Beggar::Hours }
 
-    its(:from_basecamp) { should == 14.0 }
-    its(:up_today) { should == 16.0 }
+    its(:worked) { should == 14.0 }
+    its(:max_up_today) { should == 16.0 }
     its(:difference) { should == 2.0 }
     its(:to_s) { should == '14.0h ± 2.0h' }
   end
