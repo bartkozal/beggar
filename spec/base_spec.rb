@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Beggar::Base do
   before do
     Basecamp.stub(:establish_connection!)
+    Basecamp::Person.stub(me: 'x')
     Beggar::CurrentMonth.stub(to_s: 'a')
     Beggar::Hours.stub(to_s: 'b')
     Beggar::Salary.stub(to_s: 'c')
@@ -14,4 +15,5 @@ describe Beggar::Base do
   end
 
   its(:summary) { should == %(a || b || c\n) }
+  its(:me) { should == 'x' }
 end

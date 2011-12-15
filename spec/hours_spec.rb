@@ -5,7 +5,8 @@ require 'spec_helper'
 describe 'Beggar::Hours' do
   context 'user was working in current month 2 days (8h and 6h)' do
     before do
-      api_response = double(map: [8.0, 6.0])
+      time_entries = double(map: [8.0, 6.0])
+      api_response = double(select: time_entries)
       Basecamp::TimeEntry.stub(report: api_response)
       Beggar::CurrentMonth.stub(working_days_up_today: 2)
     end

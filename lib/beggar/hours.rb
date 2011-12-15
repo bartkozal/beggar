@@ -6,7 +6,8 @@ module Beggar
       attr_accessor :project_id
 
       def worked
-        @@worked ||= Basecamp::TimeEntry.report(project_id: project_id, from: CurrentMonth.first_day, to: Date.today).map(&:hours).inject(&:+)
+        params = { project_id: project_id, from: CurrentMonth.first_day, to: Date.today }
+        @@worked ||= Basecamp::TimeEntry.report(params).select { |te| te.person_id == Base.me.id }.map(&:hours).inject(&:+)
       end
 
       def max_up_today

@@ -9,6 +9,10 @@ module Beggar
       Salary.rate = config['project']['rate']
     end
 
+    def me
+      @@me ||= Basecamp::Person.me
+    end
+
     def summary
       [CurrentMonth, Hours, Salary].join(' || ') + "\n"
     end
