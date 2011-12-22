@@ -14,7 +14,7 @@ module Beggar
     end
 
     def summary
-      [CurrentMonth, Hours, Salary].join(' || ') + "\n"
+      [CurrentMonth, Hours, Salary].join(' || ')
     end
   end
 end

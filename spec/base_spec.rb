@@ -14,6 +14,6 @@ describe Beggar::Base do
     Beggar::Base.new(config)
   end
 
-  its(:summary) { should == %(a || b || c\n) }
+  its(:summary) { should == %(a || b || c) }
   its(:me) { should == 'x' }
 end
