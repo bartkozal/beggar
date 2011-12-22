@@ -9,7 +9,7 @@ module Beggar
       Salary.rate = config['project']['rate']
     end
 
-    def me
+    def self.me
       @@me ||= Basecamp::Person.me
     end
 
