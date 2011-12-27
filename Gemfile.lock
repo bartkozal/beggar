@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    beggar (0.0.4.alpha)
+    beggar (0.0.5.alpha)
       basecamp
 
 GEM
