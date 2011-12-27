@@ -15,5 +15,5 @@ describe Beggar::Base do
   end
 
   its(:summary) { should == %(a || b || c) }
-  its(:me) { should == 'x' }
+  it { Beggar::Base.me.should == Basecamp::Person.me }
 end
