@@ -14,6 +14,7 @@ where
     140.0h ± 12.0h - worked hours ratio
     $5320.0 ± $456.0 - salary ratio
 
+### Installation
 
 Install it like any ruby gem
 
@@ -23,6 +24,7 @@ and run by
 
     beggar
 
+### Configuration
 
 Before first use, beggar will try to create configuration file in your home directory (~/.beggar)
 
