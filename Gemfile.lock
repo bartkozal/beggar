@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     beggar (0.0.5.alpha)
-      basecamp
+      basecamp (= 0.0.7)
 
 GEM
   remote: http://rubygems.org/
@@ -49,4 +49,4 @@ PLATFORMS
 
 DEPENDENCIES
   beggar!
-  rspec
+  rspec (>= 2.7.0)
