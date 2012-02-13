@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 
 require "beggar"
-runner = Beggar::CLI.new(ARGV)
-runner.start
+

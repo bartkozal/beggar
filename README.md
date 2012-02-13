@@ -40,3 +40,4 @@ Example config:
 
 ## Changelog
   v1.0.0 - first stable release
+
