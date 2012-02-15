@@ -1,0 +1,8 @@
+company: Apple
+token: abc123
+projects:
+  12345:
+    rate: 50.0
+  23456:
+    rate: 90.0
+
