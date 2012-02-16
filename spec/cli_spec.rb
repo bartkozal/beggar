@@ -1,6 +1,10 @@
 require 'beggar'
 
 describe Beggar::CLI do
+  before do
+    Beggar::Basecamp.stub(new: double())
+  end
+
   it "should load configuration on run" do
     Beggar::CLI.should_receive(:load_configuration)
     Beggar::CLI.run
@@ -12,7 +16,7 @@ describe Beggar::CLI do
     end
 
     it "returns hash with options from yml file" do
-      configuration = YAML.load_file(File.expand_path(__FILE__, 'fixtures/beggar'))
+      configuration = YAML.load_file(File.expand_path('../fixtures/beggar', __FILE__))
       YAML.should_receive(:load_file).with("#@home/.beggar").and_return(configuration)
       Beggar::CLI.run
     end
@@ -34,9 +38,5 @@ describe Beggar::CLI do
       $stdout.should_receive(:puts).with("Saved a new configuration file in ~/.beggar. Please fill it with proper data.")
       Beggar::CLI.run
     end
-  end
-
-  it 'should returns Beggar::Basecamp instance' do
-    Beggar::CLI.run.should be_kind_of(Beggar::Basecamp)
   end
 end
