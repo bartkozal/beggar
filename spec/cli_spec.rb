@@ -35,4 +35,8 @@ describe Beggar::CLI do
       Beggar::CLI.run
     end
   end
+
+  it 'should returns Beggar::Basecamp instance' do
+    Beggar::CLI.run.should be_kind_of(Beggar::Basecamp)
+  end
 end

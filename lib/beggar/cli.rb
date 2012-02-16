@@ -2,7 +2,7 @@ module Beggar
   class CLI
     class << self
       def run
-        load_configuration
+        Basecamp.new(load_configuration)
       end
 
     private
