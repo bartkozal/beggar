@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "../lib/beggar"
+require "beggar"
 
 Beggar::CLI.run
 
