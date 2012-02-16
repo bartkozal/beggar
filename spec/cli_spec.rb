@@ -12,7 +12,7 @@ describe Beggar::CLI do
     end
 
     it "returns hash with options from yml file" do
-      configuration = YAML.load_file('./fixtures/beggar')
+      configuration = YAML.load_file(File.expand_path(__FILE__, 'fixtures/beggar'))
       YAML.should_receive(:load_file).with("#@home/.beggar").and_return(configuration)
       Beggar::CLI.run
     end
