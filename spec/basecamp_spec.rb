@@ -24,19 +24,6 @@ describe Beggar::Basecamp do
     basecamp.current_user.should == 1
   end
 
-  it 'returns array with project ids' do
-    response = { "projects" =>
-      [
-        { "id" => 1, "status" => "active" },
-        { "id" => 2, "status" => "on_hold" },
-        { "id" => 4, "status" => "archived" },
-        { "id" => 3, "status" => "active" }
-      ]
-    }
-    basecamp.class.should_receive(:get).with('/projects.xml').and_return(response)
-    basecamp.projects.should == [1, 3]
-  end
-
   it 'returns time report for current user' do
     basecamp.stub(current_user: 1)
     basecamp.class.should_receive(:get).with('/time_entries/report.xml?subject_id=1')

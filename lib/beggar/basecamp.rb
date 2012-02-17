@@ -15,12 +15,6 @@ module Beggar
       @current_user ||= get('/me.xml')['person']['id']
     end
 
-    def projects
-      @projects ||= get('/projects.xml')['projects'].map do |project|
-        project['id'] if project['status'] == 'active'
-      end.compact
-    end
-
     def time_report(options = {})
       options.merge!( subject_id: current_user )
       get(%(/time_entries/report.xml#{params(options)}))
