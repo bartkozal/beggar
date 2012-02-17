@@ -31,8 +31,15 @@ describe Beggar::Basecamp do
   describe '#report' do
     it 'returns time report for specific user' do
       @basecamp.stub(user_id: 1)
-      @basecamp.class.should_receive(:get).with('/time_entries/report.xml', subject_id: 1)
+      @basecamp.class.should_receive(:get).with('/time_entries/report.xml?subject_id=1')
       @basecamp.report
+    end
+  end
+
+  describe '#parse_headers' do
+    it 'parses options for url' do
+      @basecamp.parse_headers(name: 'bob').should == '?name=bob'
+      @basecamp.parse_headers(name: 'bob', surname: 'example').should == '?name=bob&surname=example'
     end
   end
 end

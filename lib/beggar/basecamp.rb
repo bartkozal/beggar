@@ -15,7 +15,11 @@ module Beggar
 
     def report(options = {})
       options.merge!( subject_id: user_id )
-      self.class.get('/time_entries/report.xml', options)
+      self.class.get(%(/time_entries/report.xml#{parse_headers(options)}))
+    end
+
+    def parse_headers(headers)
+      '?' + headers.map { |n, v| n.to_s + '=' + v.to_s }.join('&')
     end
   end
 end
