@@ -9,6 +9,10 @@ module Beggar
         weekdays_until(Date.today)
       end
 
+      def weekday_hours
+        weekdays * 8.0
+      end
+
     private
 
       def weekdays_until(date)

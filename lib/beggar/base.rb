@@ -8,6 +8,10 @@ module Beggar
       "#{days_progression}%"
     end
 
+    def worked_hours
+      CurrentMonth.weekday_hours
+    end
+
   private
 
     def days_progression
