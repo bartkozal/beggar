@@ -2,39 +2,36 @@ module Beggar
   class CLI
     class << self
       def run
-        Base.new(Basecamp.new(load_configuration))
+        Base.new(Basecamp.new(load_config))
       end
 
     private
 
-      def load_configuration
+      def load_config
         begin
-          YAML.load_file(configuration_file_path)
+          YAML.load_file(config)
         rescue Errno::ENOENT
-          save_default_configuration
-          puts "Saved a new configuration file in ~/.beggar. Please fill it with proper data."
+          create_config
+          puts "New config has been created in ~/.beggar"
+          puts "Please fill it now with proper data."
         end
       end
 
-      def save_default_configuration
-        File.open(configuration_file_path, "w") do |output|
-          YAML.dump(default_configuration, output)
+      def create_config
+        File.open(config, "w") do |output|
+          YAML.dump(defaults, output)
         end
       end
 
-      def default_configuration
+      def defaults
         {
           "company" => "your_company_name",
           "token" => "your_basecamp_token",
-          "projects" => {
-            "project_id" => {
-              "rate" => "your_rate"
-            }
-          }
+          "projects" => { "project_id" => { "rate" => "your_rate" }}
         }
       end
 
-      def configuration_file_path
+      def config
         "#{Dir.home}/.beggar"
       end
     end

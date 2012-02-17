@@ -1,42 +1,46 @@
 require 'beggar'
 
 describe Beggar::CLI do
+  let(:config) { "#{Dir.home}/.beggar" }
+
   before do
-    Beggar::Basecamp.stub(new: double())
+    Beggar::Basecamp.stub(new: double('Basecamp'))
   end
 
-  it "should load configuration on run" do
-    Beggar::CLI.should_receive(:load_configuration)
+  after do
     Beggar::CLI.run
   end
 
-  context "load configuration" do
-    before do
-      @home = Dir.home
+  context 'config file exists' do
+    it "loads it before running" do
+      YAML.should_receive(:load_file).with(config).and_return(double('configuration'))
     end
+  end
 
-    it "returns hash with options from yml file" do
-      configuration = YAML.load_file(File.expand_path('../fixtures/beggar', __FILE__))
-      YAML.should_receive(:load_file).with("#@home/.beggar").and_return(configuration)
-      Beggar::CLI.run
-    end
-
-    it "creates .beggarc when config doesn't exists" do
-      default_configuration = {
+  context 'config file not exists' do
+    let(:default_config) {
+      {
         "company" => "your_company_name",
         "token" => "your_basecamp_token",
-        "projects" => {
-          "project_id" => {
-            "rate" => "your_rate"
-          }
-        }
+        "projects" => { "project_id" => { "rate" => "your_rate" }}
       }
-      output = double()
-      YAML.should_receive(:load_file).with("#@home/.beggar") { raise Errno::ENOENT }
-      File.should_receive(:open).with("#@home/.beggar", "w").and_yield(output)
-      YAML.should_receive(:dump).with(default_configuration, output)
-      $stdout.should_receive(:puts).with("Saved a new configuration file in ~/.beggar. Please fill it with proper data.")
-      Beggar::CLI.run
+    }
+
+    before do
+      YAML.should_receive(:load_file).with(config) { raise Errno::ENOENT }
+    end
+
+    it "creates config with default settings" do
+      $stdout.stub(:puts)
+      output = double('output')
+      File.should_receive(:open).with(config, "w").and_yield(output)
+      YAML.should_receive(:dump).with(default_config, output)
+    end
+
+    it 'displays notification for user' do
+      Beggar::CLI.stub(:create_config)
+      $stdout.should_receive(:puts).with("New config has been created in ~/.beggar")
+      $stdout.should_receive(:puts).with("Please fill it now with proper data.")
     end
   end
 end
