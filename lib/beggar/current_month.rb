@@ -13,6 +13,10 @@ module Beggar
         weekdays * 8.0
       end
 
+      def days_progression
+        (weekdays_until_today * 100.0 / weekdays).round
+      end
+
     private
 
       def weekdays_until(date)
