@@ -10,22 +10,28 @@ module Beggar
     end
 
     def me
-      @user_id ||= self.class.get('/me.xml')['person']['id']
+      @me ||= get('/me.xml')['person']['id']
     end
 
     def projects
-      @projects ||= self.class.get('/projects.xml')['projects'].map do |project|
+      @projects ||= get('/projects.xml')['projects'].map do |project|
         project['id'] if project['status'] == 'active'
       end.compact
     end
 
     def report(options = {})
       options.merge!( subject_id: me )
-      self.class.get(%(/time_entries/report.xml#{parse_headers(options)}))
+      get(%(/time_entries/report.xml#{parse_headers(options)}))
     end
 
     def parse_headers(headers)
       '?' + headers.map { |n, v| n.to_s + '=' + v.to_s }.join('&')
+    end
+
+  private
+
+    def get(path)
+      self.class.get(path)
     end
   end
 end
