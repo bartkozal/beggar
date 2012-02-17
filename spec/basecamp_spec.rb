@@ -27,5 +27,13 @@ describe Beggar::Basecamp do
       @basecamp.user_id.should == 1
     end
   end
+
+  describe '#report' do
+    it 'returns time report for specific user' do
+      @basecamp.stub(user_id: 1)
+      @basecamp.class.should_receive(:get).with('/time_entries/report.xml', subject_id: 1)
+      @basecamp.report
+    end
+  end
 end
 

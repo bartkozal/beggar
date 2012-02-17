@@ -12,5 +12,10 @@ module Beggar
     def user_id
       @user_id ||= self.class.get('/me.xml')['person']['id']
     end
+
+    def report(options = {})
+      options.merge!( subject_id: user_id )
+      self.class.get('/time_entries/report.xml', options)
+    end
   end
 end
