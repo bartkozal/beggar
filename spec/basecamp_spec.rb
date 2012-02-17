@@ -20,11 +20,11 @@ describe Beggar::Basecamp do
     end
   end
 
-  describe '#user_id' do
+  describe '#me' do
     it 'returns user id' do
       response = { 'person' => { 'id' => 1 }}
       @basecamp.class.should_receive(:get).with('/me.xml').and_return(response)
-      @basecamp.user_id.should == 1
+      @basecamp.me.should == 1
     end
   end
 
@@ -45,7 +45,7 @@ describe Beggar::Basecamp do
 
   describe '#report' do
     it 'returns time report for specific user' do
-      @basecamp.stub(user_id: 1)
+      @basecamp.stub(me: 1)
       @basecamp.class.should_receive(:get).with('/time_entries/report.xml?subject_id=1')
       @basecamp.report
     end

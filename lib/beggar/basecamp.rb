@@ -9,7 +9,7 @@ module Beggar
       self.class.basic_auth @configuration['token'], 'X'
     end
 
-    def user_id
+    def me
       @user_id ||= self.class.get('/me.xml')['person']['id']
     end
 
@@ -20,7 +20,7 @@ module Beggar
     end
 
     def report(options = {})
-      options.merge!( subject_id: user_id )
+      options.merge!( subject_id: me )
       self.class.get(%(/time_entries/report.xml#{parse_headers(options)}))
     end
 
