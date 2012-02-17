@@ -1,60 +1,52 @@
 require 'beggar'
 
 describe Beggar::Basecamp do
-  before do
-    @configuration = YAML.load_file(File.expand_path('../fixtures/beggar', __FILE__))
-    @basecamp = Beggar::Basecamp.new(@configuration)
-  end
+  let(:config) { YAML.load_file(File.expand_path('../fixtures/beggar', __FILE__)) }
+  let(:basecamp) { Beggar::Basecamp.new(config) }
 
-  describe 'init HTTParty' do
+  describe 'constructor' do
     after do
-      Beggar::Basecamp.new(@configuration)
+      Beggar::Basecamp.new(config)
     end
 
-    it 'set up base uri with company name' do
+    it 'set base uri' do
       Beggar::Basecamp.should_receive(:base_uri).with('https://Apple.basecamphq.com')
     end
 
-    it 'set up basic auth' do
+    it 'set basic auth credentials' do
       Beggar::Basecamp.should_receive(:basic_auth).with('abc123', 'X')
     end
   end
 
-  describe '#me' do
-    it 'returns user id' do
-      response = { 'person' => { 'id' => 1 }}
-      @basecamp.class.should_receive(:get).with('/me.xml').and_return(response)
-      @basecamp.me.should == 1
-    end
+  it 'returns user id' do
+    response = { 'person' => { 'id' => 1 }}
+    basecamp.class.should_receive(:get).with('/me.xml').and_return(response)
+    basecamp.current_user.should == 1
   end
 
-  describe '#projects' do
-    it 'returns array of projects' do
-      response = { "projects" =>
-                   [
-                     { "id" => 1, "status" => "active" },
-                     { "id" => 2, "status" => "on_hold" },
-                     { "id" => 4, "status" => "archived" },
-                     { "id" => 3, "status" => "active" }
-                   ]
-      }
-      @basecamp.class.should_receive(:get).with('/projects.xml').and_return(response)
-      @basecamp.projects.should == [1, 3]
-    end
+  it 'returns array with project ids' do
+    response = { "projects" =>
+      [
+        { "id" => 1, "status" => "active" },
+        { "id" => 2, "status" => "on_hold" },
+        { "id" => 4, "status" => "archived" },
+        { "id" => 3, "status" => "active" }
+      ]
+    }
+    basecamp.class.should_receive(:get).with('/projects.xml').and_return(response)
+    basecamp.projects.should == [1, 3]
   end
 
-  describe '#report' do
-    it 'returns time report for specific user' do
-      @basecamp.stub(me: 1)
-      @basecamp.class.should_receive(:get).with('/time_entries/report.xml?subject_id=1')
-      @basecamp.report
-    end
+  it 'returns time report for current user' do
+    basecamp.stub(current_user: 1)
+    basecamp.class.should_receive(:get).with('/time_entries/report.xml?subject_id=1')
+    basecamp.time_report
   end
 
-  describe '#parse_headers' do
-    it 'parses options for url' do
-      @basecamp.parse_headers(name: 'bob').should == '?name=bob'
-      @basecamp.parse_headers(name: 'bob', surname: 'example').should == '?name=bob&surname=example'
+  describe 'private methods' do
+    it 'parses options to path params' do
+      basecamp.send(:params, { name: 'bob'}).should == '?name=bob'
+      basecamp.send(:params, { name: 'bob', surname: 'example'}).should == '?name=bob&surname=example'
     end
   end
 end
