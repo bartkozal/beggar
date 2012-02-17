@@ -28,6 +28,21 @@ describe Beggar::Basecamp do
     end
   end
 
+  describe '#projects' do
+    it 'returns array of projects' do
+      response = { "projects" =>
+                   [
+                     { "id" => 1, "status" => "active" },
+                     { "id" => 2, "status" => "on_hold" },
+                     { "id" => 4, "status" => "archived" },
+                     { "id" => 3, "status" => "active" }
+                   ]
+      }
+      @basecamp.class.should_receive(:get).with('/projects.xml').and_return(response)
+      @basecamp.projects.should == [1, 3]
+    end
+  end
+
   describe '#report' do
     it 'returns time report for specific user' do
       @basecamp.stub(user_id: 1)
