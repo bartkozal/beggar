@@ -44,5 +44,9 @@ describe Beggar::CLI do
       $stdout.should_receive(:puts).with("Please fill it with proper data.")
     end
   end
+
+  context 'when config file is wrong' do
+    pending
+  end
 end
 
