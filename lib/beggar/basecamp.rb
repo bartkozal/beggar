@@ -11,13 +11,27 @@ module Beggar
       self.class.basic_auth(config['token'], 'X')
     end
 
+    def time_report(options = {})
+      options.merge!( subject_id: current_user )
+      get(%(/time_entries/report.xml#{params(options)}))
+    end
+
     def current_user
       @current_user ||= get('/me.xml')['person']['id']
     end
 
-    def time_report(options = {})
-      options.merge!( subject_id: current_user )
-      get(%(/time_entries/report.xml#{params(options)}))
+    def current_month
+      @current_month ||= time_report(from: CurrentMonth.first_day, to: CurrentMonth.today)
+    end
+
+    def worked_hours
+      current_month['time_entries'].map do |entry|
+        entry['hours']
+      end.inject(:+)
+    end
+
+    def hours_ratio
+      CurrentMonth.weekday_hours_until_today - worked_hours
     end
 
   private

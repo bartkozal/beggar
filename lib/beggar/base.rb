@@ -9,7 +9,13 @@ module Beggar
     end
 
     def worked_hours
-      CurrentMonth.weekday_hours
+      "#{@basecamp.worked_hours}h, #{ratio(@basecamp.hours_ratio)}h"
+    end
+
+  private
+
+    def ratio(number)
+      (number > 0) ? "-#{number}" : "+#{number.abs}"
     end
   end
 end
