@@ -1,4 +1,4 @@
 module Beggar
-  VERSION = "0.0.5.alpha"
+  VERSION = "1.0.0"
 end
 
