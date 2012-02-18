@@ -19,6 +19,10 @@ module Beggar
       "#{as_money(basecamp.worked_hours)} zł, #{ratio(as_money(basecamp.hours_ratio))} zł"
     end
 
+    def summary
+      [progress, worked_hours, salary].join(' || ')
+    end
+
   private
 
     def as_money(hours)

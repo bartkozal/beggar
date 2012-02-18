@@ -61,5 +61,10 @@ describe Beggar::Base do
       base.send(:as_money, 5.0).should == 250.0
     end
   end
+
+  it 'returns summary' do
+    base.stub(progress: "78%", worked_hours: "140.0h, -12.0h", salary: "5320.0 zł, -456.0 zł")
+    base.summary.should == "78% || 140.0h, -12.0h || 5320.0 zł, -456.0 zł"
+  end
 end
 

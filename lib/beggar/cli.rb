@@ -2,7 +2,7 @@ module Beggar
   class CLI
     class << self
       def run
-        Base.new(Basecamp.new(load_config))
+       $stdout << Base.new(Basecamp.new(load_config)).summary
       end
 
     private
