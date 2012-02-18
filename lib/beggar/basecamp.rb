@@ -12,12 +12,12 @@ module Beggar
     end
 
     def time_report(options = {})
-      options.merge!( subject_id: current_user )
-      get(%(/time_entries/report.xml#{params(options)}))
+      options.merge!(subject_id: current_user)
+      self.class.get("/time_entries/report.xml", :query => options)
     end
 
     def current_user
-      @current_user ||= get('/me.xml')['person']['id']
+      @current_user ||= self.class.get('/me.xml')['person']['id']
     end
 
     def current_month
@@ -32,16 +32,6 @@ module Beggar
 
     def hours_ratio
       CurrentMonth.weekday_hours_until_today - worked_hours
-    end
-
-  private
-
-    def get(path)
-      self.class.get(path)
-    end
-
-    def params(options)
-      '?' + options.map { |name, value| "#{name}=#{value}" }.join('&')
     end
   end
 end
