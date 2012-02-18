@@ -17,7 +17,7 @@ module Beggar
         weekdays_until_today * 8.0
       end
 
-      def days_progression
+      def weekdays_progression
         (weekdays_until_today * 100.0 / weekdays).round
       end
 

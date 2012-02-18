@@ -8,7 +8,7 @@ module Beggar
     end
 
     def progress
-      "#{CurrentMonth.days_progression}%"
+      "#{CurrentMonth.weekdays_progression}%"
     end
 
     def worked_hours
