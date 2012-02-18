@@ -14,6 +14,10 @@ describe Beggar::CLI do
   end
 
   context 'when config file exists' do
+    before do
+      File.stub(:exists?).and_return(true)
+    end
+
     it "loads it before running" do
       YAML.should_receive(:load_file).with(config).and_return(double('configuration'))
     end
@@ -29,8 +33,9 @@ describe Beggar::CLI do
     }
 
     before do
-      YAML.should_receive(:load_file).with(config) { raise Errno::ENOENT }
+      File.stub(:exists?).and_return(false)
     end
+
     it "creates config with default settings" do
       output = double('output')
       File.should_receive(:open).with(config, "w").and_yield(output)
