@@ -25,9 +25,9 @@ module Beggar
 
       def defaults
         {
-          "company" => "your_company_name",
-          "token" => "your_basecamp_token",
-          "projects" => { "project_id" => { "rate" => "your_rate" }}
+          "company" => "___",
+          "token" => "___",
+          "rate" => "___"
         }
       end
 

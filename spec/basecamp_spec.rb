@@ -14,7 +14,7 @@ describe Beggar::Basecamp do
     end
 
     it 'set base uri' do
-      Beggar::Basecamp.should_receive(:base_uri).with('https://Apple.basecamphq.com')
+      Beggar::Basecamp.should_receive(:base_uri).with('https://pear.basecamphq.com')
     end
 
     it 'set basic auth credentials' do
