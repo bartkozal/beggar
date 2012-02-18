@@ -20,7 +20,10 @@ module Beggar
     end
 
     def summary
-      [progress, worked_hours, salary].join(' || ')
+      %Q{Current month
+Working days progress: #{progress}
+Worked hours ratio:    #{worked_hours}
+Salary ration:         #{salary}}
     end
 
   private
