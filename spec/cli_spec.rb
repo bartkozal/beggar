@@ -4,12 +4,13 @@ describe Beggar::CLI do
   let(:config) { "#{Dir.home}/.beggar" }
 
   before do
+    $stdout.stub(:puts)
     Beggar::Basecamp.stub(new: double('Basecamp'))
     Beggar::Base.stub_chain(:new, :summary)
   end
 
   after do
-    Beggar::CLI.run
+    -> { Beggar::CLI.run }.should raise_error { SystemExit }
   end
 
   context 'when config file exists' do
@@ -28,21 +29,20 @@ describe Beggar::CLI do
     }
 
     before do
-      $stdout.stub(:puts)
       YAML.should_receive(:load_file).with(config) { raise Errno::ENOENT }
     end
-
     it "creates config with default settings" do
       output = double('output')
       File.should_receive(:open).with(config, "w").and_yield(output)
       YAML.should_receive(:dump).with(default_config, output)
     end
 
-    it 'displays notification for user' do
+    it 'displays notification' do
       $stdout.unstub(:puts)
       Beggar::CLI.stub(:create_config)
       $stdout.should_receive(:puts).with("New config has been created in ~/.beggar")
-      $stdout.should_receive(:puts).with("Please fill it now with proper data.")
+      $stdout.should_receive(:puts).with("Please fill it with proper data.")
     end
   end
 end
+

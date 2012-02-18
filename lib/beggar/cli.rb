@@ -2,19 +2,22 @@ module Beggar
   class CLI
     class << self
       def run
-       $stdout << Base.new(Basecamp.new(load_config)).summary
+        begin
+          $stdout.puts Base.new(Basecamp.new(load_config)).summary
+        rescue Errno::ENOENT
+          create_config
+          $stdout.puts "New config has been created in ~/.beggar"
+          $stdout.puts "Please fill it with proper data."
+        rescue URI::InvalidURIError
+          $stdout.puts "Ensure that your config file is proper formatted!" 
+        end
+        exit 0
       end
 
     private
 
       def load_config
-        begin
-          YAML.load_file(config)
-        rescue Errno::ENOENT
-          create_config
-          puts "New config has been created in ~/.beggar"
-          puts "Please fill it now with proper data."
-        end
+        YAML.load_file(config)
       end
 
       def create_config

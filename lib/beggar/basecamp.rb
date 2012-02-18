@@ -4,8 +4,8 @@ module Beggar
 
     attr_accessor :config
 
-    def initialize(paresed_yaml)
-      config = paresed_yaml
+    def initialize(config)
+      @config = config
 
       self.class.base_uri("https://#{config['company']}.basecamphq.com")
       self.class.basic_auth(config['token'], 'X')

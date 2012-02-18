@@ -2,7 +2,7 @@
 require 'beggar'
 
 describe Beggar::Base do
-  let(:basecamp) { double('Basecamp', config: double(rate: 50.0)) }
+  let(:basecamp) { double('Basecamp', config: { 'rate' => 50.0 }) }
   let(:base) { Beggar::Base.new(basecamp) }
 
   describe 'displaying weekdays progression as a percents' do
@@ -57,7 +57,7 @@ describe Beggar::Base do
     end
 
     it 'returns hours multiplied by rate' do
-      basecamp.stub_chain(:config, :rate).and_return(50.0)
+      basecamp.stub(:config).and_return({ 'rate' => 50.0 })
       base.send(:as_money, 5.0).should == 250.0
     end
   end

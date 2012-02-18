@@ -26,7 +26,7 @@ module Beggar
   private
 
     def as_money(hours)
-      hours * basecamp.config.rate
+      hours * basecamp.config['rate']
     end
 
     def ratio(number)
