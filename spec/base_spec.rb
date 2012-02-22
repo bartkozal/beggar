@@ -27,12 +27,12 @@ describe Beggar::Base do
       basecamp.stub(worked_hours: 136.0, hours_ratio: 32.0)
     end
 
-    it 'returns "136.0h, -32.0h"' do
-      base.worked_hours.should == "136.0h, -32.0h"
+    it 'returns "136.0h (-32.0h)"' do
+      base.worked_hours.should == "136.0h (-32.0h)"
     end
 
-    it 'returns "6800.0 zł, -1600.0 zł"' do
-      base.salary.should == "6800.0 zł, -1600.0 zł"
+    it 'returns "6800.0zł (-1600.0zł)"' do
+      base.salary.should == "6800.0zł (-1600.0zł)"
     end
   end
 
@@ -41,12 +41,12 @@ describe Beggar::Base do
       basecamp.stub(worked_hours: 176.0, hours_ratio: -8.0)
     end
 
-    it 'returns "176.0h, +8.0h"' do
-      base.worked_hours.should == "176.0h, +8.0h"
+    it 'returns "176.0h (+8.0h)"' do
+      base.worked_hours.should == "176.0h (+8.0h)"
     end
 
-    it 'returns "8800.0 zł, +$400.0 zł"' do
-      base.salary.should == "8800.0 zł, +400.0 zł"
+    it 'returns "8800.0zł (+$400.0zł)"' do
+      base.salary.should == "8800.0zł (+400.0zł)"
     end
   end
 
@@ -63,11 +63,11 @@ describe Beggar::Base do
   end
 
   it 'returns summary' do
-    base.stub(progress: "78%", worked_hours: "140.0h, -12.0h", salary: "5320.0 zł, -456.0 zł")
+    base.stub(progress: "78%", worked_hours: "140.0h (-12.0h)", salary: "5320.0zł (-456.0zł)")
     base.summary.should == %q{Current month
-Working days progress: 78%
-Worked hours ratio:    140.0h, -12.0h
-Salary ration:         5320.0 zł, -456.0 zł}
+Weekdays:     78%
+Worked hours: 140.0h (-12.0h)
+Salary:       5320.0zł (-456.0zł)}
   end
 end
 

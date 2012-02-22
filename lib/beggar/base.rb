@@ -12,18 +12,18 @@ module Beggar
     end
 
     def worked_hours
-      "#{basecamp.worked_hours}h, #{ratio(basecamp.hours_ratio)}h"
+      "#{basecamp.worked_hours}h (#{ratio(basecamp.hours_ratio)}h)"
     end
 
     def salary
-      "#{as_money(basecamp.worked_hours)} zł, #{ratio(as_money(basecamp.hours_ratio))} zł"
+      "#{as_money(basecamp.worked_hours)}zł (#{ratio(as_money(basecamp.hours_ratio))}zł)"
     end
 
     def summary
       %Q{Current month
-Working days progress: #{progress}
-Worked hours ratio:    #{worked_hours}
-Salary ration:         #{salary}}
+Weekdays:     #{progress}
+Worked hours: #{worked_hours}
+Salary:       #{salary}}
     end
 
   private
