@@ -51,7 +51,11 @@ describe Beggar::CLI do
   end
 
   context 'when config file is wrong' do
-    pending
+    it 'displays notification' do
+      $stdout.unstub(:puts)
+      File.stub(:exists?) { raise URI::InvalidURIError }
+      $stdout.should_receive(:puts).with("Ensure that your config file is proper formatted!")
+    end
   end
 end
 

@@ -12,6 +12,7 @@ module Beggar
         exit 0
       rescue URI::InvalidURIError
         $stdout.puts "Ensure that your config file is proper formatted!"
+        exit 1
       end
 
       private
