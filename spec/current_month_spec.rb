@@ -8,11 +8,11 @@ describe Beggar::CurrentMonth do
   end
 
   it 'returns weekdays' do
-    pending
+    current_month.weekdays.should == 21
   end
 
   it 'returns weekdays until today' do
-    pending
+    current_month.weekdays_until_today.should == 13
   end
 
   it 'returns weekdays in hours' do
@@ -24,31 +24,32 @@ describe Beggar::CurrentMonth do
   end
 
   it 'returns weekdays progression' do
-    pending
+    current_month.weekdays_progression.should == 62
   end
 
   it 'returns weekdays until date' do
-    pending
+    date = Date.new(2012, 2, 23)
+    current_month.weekdays_until(date).should == 17
   end
 
   it 'returns first day of month' do
-    pending
+    current_month.first_day.should == Date.new(2012, 2, 1)
   end
 
   it 'returns last day of month' do
-    pending
+    current_month.last_day.should == Date.new(2012, 2, 29)
   end
 
   it 'returns year' do
-    pending
+    current_month.year.should == 2012
   end
 
   it 'returns month' do
-    pending
+    current_month.month.should == 2
   end
 
   it 'returns today' do
-    pending
+    current_month.today.should == Date.new(2012, 2, 17)
   end
 end
 
