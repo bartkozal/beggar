@@ -33,7 +33,14 @@ Example config:
 
 ## Changelog
 
-  * v1.0.2 - fix bug when time entries are empty
-  * v1.0.1 - change output
-  * v1.0.0 - first stable release
-
+<table>
+    <tr>
+        <td>v1.0.2</td><td>fix bug when time entries are empty</td>
+    </tr>
+    <tr>
+        <td>v1.0.1</td><td>change output</td>
+    </tr>
+    <tr>
+        <td>v1.0.0</td><td>first stable release</td>
+    </tr>
+</table>
