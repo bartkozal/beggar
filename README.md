@@ -32,6 +32,8 @@ Example config:
     rate: 50.0
 
 ## Changelog
-  v1.0.1 - change output
-  v1.0.0 - first stable release
+
+  * v1.0.2 - fix bug when time entries are empty
+  * v1.0.1 - change output
+  * v1.0.0 - first stable release
 
