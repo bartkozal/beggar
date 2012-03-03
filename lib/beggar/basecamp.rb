@@ -25,7 +25,9 @@ module Beggar
     end
 
     def worked_hours
-      current_month['time_entries'].map do |entry|
+      time_entries = current_month['time_entries']
+      return 0 if time_entries.empty?
+      time_entries.map do |entry|
         entry['hours']
       end.inject(:+)
     end

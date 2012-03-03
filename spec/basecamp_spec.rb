@@ -54,6 +54,12 @@ describe Beggar::Basecamp do
     basecamp.worked_hours.should == 22.0
   end
 
+  it 'returns 0 when no time entries' do
+    response = { "time_entries" => [] }
+    basecamp.stub(current_month: response)
+    basecamp.worked_hours.should == 0
+  end
+
   it 'returns hours ratio with minus when working hours > weekdays hours' do
     basecamp.stub(worked_hours: 106.0)
     basecamp.hours_ratio.should == -2.0
