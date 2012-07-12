@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_development_dependency "rspec", ">= 2.7.0"
   s.add_dependency "httparty"
+  s.add_dependency "mechanize"
 end
