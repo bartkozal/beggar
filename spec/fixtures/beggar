@@ -1,4 +1,7 @@
 company: pear
 token: abc123
 rate: 50.0
+starts_on: monday
+ends_on: tuesday
+hours_per_day: 9
 
