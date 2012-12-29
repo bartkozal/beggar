@@ -8,7 +8,7 @@ module Beggar
     end
 
     def progress
-      "#{CurrentMonth.weekdays_progression}%"
+      "#{basecamp.workdays_progression}%"
     end
 
     def worked_hours
@@ -21,7 +21,7 @@ module Beggar
 
     def summary
       %Q{Current month
-Weekdays:     #{progress}
+Workdays:     #{progress}
 Worked hours: #{worked_hours}
 Salary:       #{salary}}
     end

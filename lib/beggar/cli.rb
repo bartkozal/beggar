@@ -31,7 +31,8 @@ module Beggar
           {
             "company" => "___",
             "token" => "___",
-            "rate" => "___"
+            "rate" => "___",
+            "country" => "___"
           }
         end
 

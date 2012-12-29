@@ -7,7 +7,7 @@ Beggar is a tool for generating time reports from your Basecamp account
 Example output:
 
     Current month
-    Weekdays:     78%
+    Workdays:     78%
     Worked hours: 140.0h (-12.0h)
     Salary:       5320.0zł (-456.0zł)
 
@@ -30,6 +30,7 @@ Example config:
     company: pear
     token: abc123
     rate: 50.0
+    country: pl
 
 ## Changelog
 

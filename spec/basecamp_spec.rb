@@ -43,29 +43,29 @@ describe Beggar::Basecamp do
         to: Date.new(2012, 02,17)
       }
     )
-    basecamp.current_month
+    basecamp.current_month_report
   end
 
   it 'returns worked hours' do
     response = { "time_entries" =>
       [{ "hours" => 8.0 }, { "hours" => 6.0 }, { "hours" => 8.0 }]
     }
-    basecamp.stub(current_month: response)
+    basecamp.stub(current_month_report: response)
     basecamp.worked_hours.should == 22.0
   end
 
   it 'returns 0 when no time entries' do
     response = { "time_entries" => [] }
-    basecamp.stub(current_month: response)
+    basecamp.stub(current_month_report: response)
     basecamp.worked_hours.should == 0
   end
 
-  it 'returns hours ratio with minus when working hours > weekdays hours' do
+  it 'returns hours ratio with minus when working hours > workdays hours' do
     basecamp.stub(worked_hours: 106.0)
     basecamp.hours_ratio.should == -2.0
   end
 
-  it 'returns hours ratio with plus when worked hours < weekdays hours' do
+  it 'returns hours ratio with plus when worked hours < workdays hours' do
     basecamp.stub(worked_hours: 96.0)
     basecamp.hours_ratio.should == 8.0
   end
