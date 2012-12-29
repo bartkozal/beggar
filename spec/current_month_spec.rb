@@ -1,35 +1,35 @@
 require 'beggar'
 
 describe Beggar::CurrentMonth do
-  let(:current_month) { Beggar::CurrentMonth }
+  let(:current_month) { Beggar::CurrentMonth.new(:country => 'pl') }
 
   before do
     Date.stub(today: Date.new(2012, 2, 17))
   end
 
-  it 'returns weekdays' do
-    current_month.weekdays.should == 21
+  it 'returns workdays' do
+    current_month.workdays.should == 21
   end
 
-  it 'returns weekdays until today' do
-    current_month.weekdays_until_today.should == 13
+  it 'returns workdays until today' do
+    current_month.workdays_until_today.should == 13
   end
 
-  it 'returns weekdays in hours' do
-    current_month.weekday_hours.should == 168.0
+  it 'returns workdays in hours' do
+    current_month.workday_hours.should == 168.0
   end
 
-  it 'returns weekdays in hours until today' do
-    current_month.weekday_hours_until_today.should == 104.0
+  it 'returns workdays in hours until today' do
+    current_month.workday_hours_until_today.should == 104.0
   end
 
-  it 'returns weekdays progression' do
-    current_month.weekdays_progression.should == 62
+  it 'returns workdays progression' do
+    current_month.workdays_progression.should == 62
   end
 
-  it 'returns weekdays until date' do
+  it 'returns workdays until date' do
     date = Date.new(2012, 2, 23)
-    current_month.weekdays_until(date).should == 17
+    current_month.workdays_until(date).should == 17
   end
 
   it 'returns first day of month' do

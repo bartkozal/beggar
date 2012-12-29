@@ -2,7 +2,8 @@
 require 'beggar'
 
 describe Beggar::Base do
-  let(:basecamp) { double('Basecamp', config: { 'rate' => 50.0 }) }
+  let(:config) { YAML.load_file(File.expand_path('../fixtures/beggar', __FILE__)) }
+  let(:basecamp) { Beggar::Basecamp.new(config) }
   let(:base) { Beggar::Base.new(basecamp) }
 
   describe 'displaying weekdays progression as a percents' do
@@ -11,9 +12,9 @@ describe Beggar::Base do
       base.progress.should == "62%"
     end
 
-    it 'returns 9% on 2nd December 2011' do
+    it 'returns 10% on 2nd December 2011' do
       Date.stub(today: Date.new(2011, 12, 2))
-      base.progress.should == "9%"
+      base.progress.should == "10%"
     end
 
     it 'returns 100% on 30th November 1988' do
@@ -65,7 +66,7 @@ describe Beggar::Base do
   it 'returns summary' do
     base.stub(progress: "78%", worked_hours: "140.0h (-12.0h)", salary: "5320.0zł (-456.0zł)")
     base.summary.should == %q{Current month
-Weekdays:     78%
+Workdays:     78%
 Worked hours: 140.0h (-12.0h)
 Salary:       5320.0zł (-456.0zł)}
   end

@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     beggar (1.0.2)
+      holidays
       httparty
       mechanize
 
@@ -9,9 +10,10 @@ GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.3)
-    domain_name (0.5.3)
+    domain_name (0.5.6)
       unf (~> 0.0.3)
-    httparty (0.8.3)
+    holidays (1.0.5)
+    httparty (0.9.0)
       multi_json (~> 1.0)
       multi_xml
     mechanize (2.5.1)
@@ -23,11 +25,11 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.19)
-    multi_json (1.3.6)
+    multi_json (1.5.0)
     multi_xml (0.5.1)
     net-http-digest_auth (1.2.1)
-    net-http-persistent (2.7)
-    nokogiri (1.5.5)
+    net-http-persistent (2.8)
+    nokogiri (1.5.6)
     ntlm-http (0.1.1)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
