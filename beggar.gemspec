@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", ">= 2.7.0"
   s.add_dependency "httparty"
   s.add_dependency "mechanize"
+  s.add_dependency "holidays"
 end

@@ -28,7 +28,8 @@ describe Beggar::CLI do
       {
         "company" => "___",
         "token" => "___",
-        "rate" => "___"
+        "rate" => "___",
+        "country" => "___"
       }
     }
 

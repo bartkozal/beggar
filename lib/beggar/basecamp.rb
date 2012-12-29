@@ -20,12 +20,12 @@ module Beggar
       @current_user ||= self.class.get('/me.xml')['person']['id']
     end
 
-    def current_month
-      @current_month ||= time_report(from: CurrentMonth.first_day, to: CurrentMonth.today)
+    def current_month_report
+      @current_month_report ||= time_report(from: current_month.first_day, to: current_month.today)
     end
 
     def worked_hours
-      time_entries = current_month['time_entries']
+      time_entries = current_month_report['time_entries']
       return 0 if time_entries.empty?
       time_entries.map do |entry|
         entry['hours']
@@ -33,7 +33,15 @@ module Beggar
     end
 
     def hours_ratio
-      CurrentMonth.weekday_hours_until_today - worked_hours
+      current_month.workday_hours_until_today - worked_hours
+    end
+
+    def workdays_progression
+      current_month.workdays_progression
+    end
+
+    def current_month
+      @current_month ||= CurrentMonth.new(:country => @config['country'])
     end
   end
 end

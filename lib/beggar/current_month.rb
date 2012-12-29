@@ -1,49 +1,54 @@
+require 'holidays'
+
 module Beggar
   class CurrentMonth
-    class << self
-      def weekdays
-        weekdays_until(last_day)
-      end
+    def initialize(options = {})
+      @country = options[:country]
+    end
 
-      def weekdays_until_today
-        weekdays_until(today)
-      end
+    def workdays
+      workdays_until(last_day)
+    end
 
-      def weekday_hours
-        weekdays * 8.0
-      end
+    def workdays_until_today
+      workdays_until(today)
+    end
 
-      def weekday_hours_until_today
-        weekdays_until_today * 8.0
-      end
+    def workday_hours
+      workdays * 8.0
+    end
 
-      def weekdays_progression
-        (weekdays_until_today * 100.0 / weekdays).round
-      end
+    def workday_hours_until_today
+      workdays_until_today * 8.0
+    end
 
-      def weekdays_until(date)
-        (first_day..date).reject { |d| [0, 6].include? d.wday }.length
-      end
+    def workdays_progression
+      (workdays_until_today * 100.0 / workdays).round
+    end
 
-      def first_day
-        Date.new(year, month, 1)
-      end
+    def workdays_until(date)
+      (first_day..date).reject { |d|
+        [0, 6].include?(d.wday) || d.holiday?(@country) }.length
+    end
 
-      def last_day
-        first_day.next_month - 1
-      end
+    def first_day
+      Date.new(year, month, 1)
+    end
 
-      def year
-        today.year
-      end
+    def last_day
+      first_day.next_month - 1
+    end
 
-      def month
-        today.month
-      end
+    def year
+      today.year
+    end
 
-      def today
-        Date.today
-      end
+    def month
+      today.month
+    end
+
+    def today
+      Date.today
     end
   end
 end
