@@ -36,6 +36,9 @@ Example config:
 
 <table>
     <tr>
+        <td>v1.0.3</td><td>don't count holidays as working days</td>
+    </tr>
+    <tr>
         <td>v1.0.2</td><td>fix bug when time entries are empty</td>
     </tr>
     <tr>
