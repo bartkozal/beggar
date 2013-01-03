@@ -48,3 +48,7 @@ Example config:
         <td>v1.0.0</td><td>first stable release</td>
     </tr>
 </table>
+
+## Contributors
+
+[@grk](https://github.com/grk)
