@@ -1,4 +1,4 @@
-# Beggar [![Build Status](https://secure.travis-ci.org/bkzl/beggar.png)](http://travis-ci.org/bkzl/beggar)
+# Beggar [![Build Status](https://secure.travis-ci.org/bkzl/beggar.png)](http://travis-ci.org/bkzl/beggar) [![Code Climate](https://codeclimate.com/github/bkzl/beggar.png)](https://codeclimate.com/github/bkzl/beggar)
 
 ## Description
 
