@@ -1,4 +1,4 @@
-# Beggar [![Build Status](https://secure.travis-ci.org/bkzl/beggar.png)](http://travis-ci.org/bkzl/beggar) [![Code Climate](https://codeclimate.com/github/bkzl/beggar.png)](https://codeclimate.com/github/bkzl/beggar)
+# Beggar [![Build Status](https://semaphoreci.com/api/v1/bkzl/beggar/branches/master/shields_badge.svg)](https://semaphoreci.com/bkzl/beggar)
 
 ## Description
 
